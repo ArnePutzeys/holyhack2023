@@ -1,7 +1,7 @@
 # input is een lijst van woorden en elk woord van deze lijst wordt per record vd json gecheckt of het erin zit
 # alle scores adden en dan delen door het aantal voorkomens dat geteld is
 # data afhankelijkheid dus load_data moet aangepast worden zodat je kan kiezen welke data je wilt laden in bepaalde tijdspanne
-from data_load import data_load, data_load2, data_load3, data_load4
+from data_load import data_load, data_load2, data_load4
 from sentiment_dutch import Sentiment_dutch
 from sentiment_analysis2 import Sentiment
 import time
@@ -88,13 +88,13 @@ def count(input, file, startdate=None, enddate=None, lines=None):
     return keywords,totaal,procent,polariteit,subjectivity,gem_review,tijdsvoorkomen, x_values, y_values
             
 if __name__ == "__main__":
-    input = ['status','quit']
+    #input = ['status','quit']
     #input = ['Vinted-app', 'verzending', 'bezorging', 'post', 'levering', 'opruimen', 'Pakket']
-    #input = ['quality']
+    input = ['quality']
     for i in range(len(input)):
         input[i] = input[i].lower()
 
     file = '../../data/reviews_pakket.json'
-    #file = '../../data/spotify_data.json'
+    #file = '../../data/spotify.json'
     count(input, file,None,None,20000)
     #count(input, file, '2020-11-19', '2022-12-30')
