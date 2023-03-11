@@ -62,7 +62,7 @@ def get_subjects_nl(file_path, language):
             stop=None,
             temperature=0.5,
         )
-        print(response.choices[0])
+        #print(response.choices[0])
         try:
             subjects = response.choices[0].text.replace('\n', '').replace('"', '').replace('.', '').split()[-1]
         except: 
