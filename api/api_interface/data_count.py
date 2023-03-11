@@ -49,19 +49,17 @@ def count(input, file, startdate=None, enddate=None, lines=None):
     for element in count.keys():
         try: 
             count[element][1] = count[element][1] / count[element][0]
+            keywords = input
+            totaal = [count[element][0] for element in count]
+            procent = [t / iterations for t in totaal]
+            polariteit = [count[element][2].get_sentiment(t)['average_polarity'] for element, t in zip(count, totaal)]
+            sentiment = [count[element][2].get_sentiment(t)['overall_sentiment'] for element, t in zip(count, totaal)]
+            gem_review = [count[element][1] for element in count]
+            tijdsvoorkomen = []
         except ZeroDivisionError:
-            print('Item does not appear in the data')
-            exit()
-
+            pass
     # (keywords), hoe_vaak_totaal, hoe_vaak_procent, polariteit, (subjectiviteit), gem_review, tijdsvoorkomen
-    keywords = input
-    totaal = [count[element][0] for element in count]
-    procent = [t / iterations for t in totaal]
-    polariteit = [count[element][2].get_sentiment(t)['average_polarity'] for element, t in zip(count, totaal)]
-    sentiment = [count[element][2].get_sentiment(t)['overall_sentiment'] for element, t in zip(count, totaal)]
-    gem_review = [count[element][1] for element in count]
-    tijdsvoorkomen = []
-    print(keywords,totaal,procent,polariteit,sentiment,gem_review,tijdsvoorkomen)
+    #print(keywords,totaal,procent,polariteit,sentiment,gem_review,tijdsvoorkomen)
     return keywords,totaal,procent,polariteit,sentiment,gem_review,tijdsvoorkomen
             
 if __name__ == "__main__":
