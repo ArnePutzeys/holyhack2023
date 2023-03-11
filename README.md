@@ -15,3 +15,10 @@ The backend files are also located in the api_interface folder. Below you can fi
 - data_load.py: 
 - data_count.py:
 
+
+
+In the scripts folder you can find scripts we used and developed during the hackathon:
+- reviewscraping was used to scrape the apple app store to collect data for our "competition analysis"
+- cv_to_json was used (together with an online tool) to convert the spotify csv data to an usable json format
+- synonyms.py was developed to look up synonyms for words and use these synonyms to furthen our capabilities of "occurance analysis", in the end this only   ended up working for english words since free Dutch synonyms apis are basically non existant
+
