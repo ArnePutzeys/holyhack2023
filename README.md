@@ -3,7 +3,7 @@
 The project consists of a backend and a frontend, which are connected through a Django REST API. The backend is written in Python, the frontend in React.
 
 ### Backend + API
-The Django API is located in the *holyhack2023/api* folder. The api_interface folder represents the actual API application, and the *pocket_api* folder contains Django's configuration files.
+The Django API is located in the *holyhack2023/api* folder. The *api_interface* folder represents the actual API application, and the *pocket_api* folder contains Django's configuration files.
 
 The backend files are also located in the api_interface folder. Below you can find a short description of each:
 - *classification.py*: this file takes a dataset of reviews (in English) as input. Using Linear Discriminant Analysis it comes up with keywords that appear in groups together, indicating a trend in the data. Then it connects to openAI's text-davinci-002 to find a word that most accurately describes the subject of these keywords. A dictionary with these subjects as keys and the keywords as values is returned.
@@ -17,21 +17,27 @@ The backend files are also located in the api_interface folder. Below you can fi
 
 
 In the scripts folder you can find additional scripts we developed during the hackathon:
-- reviewscraping.py was used to scrape the Apple app store to collect data for our "competition analysis" functionality
-- *cv_to_json.py* was used (together with an online tool) to convert the spotify *.csv* data to an usable *.json* format
+- *reviewscraping.py*: used to scrape the Apple app store to collect data for our "competition analysis" functionality.
+- *cv_to_json.py*: used (together with an online tool) to convert the spotify *.csv* data to an usable *.json* format.
 
 ### Frontend (React)
 The frontend contains the following files and directories:
 - */src/assets*: Assets of this project: this includes css, images and svg's.
 
 - */src/backend*: JSON processors to contact the API from the backend.
-- /src/chartsapi: Uses the backend data to create charts to display on the website.
+- */src/chartsapi*: uses the backend data to create charts to display on the website.
 
-- */src/components*: Components provided by the template Horizon Free.
-- */src/layouts*: Auth and admin are the 2 pages on this site, there are their base template.
-- */src/theme*: Themes provided by the template Horizon Free.
-- */src/types*: Typescript types used by the template Horizon Free.
-- */src/variables*: Variables for charts.
-- */src/views*: The layout of each page inside "www.website.com/admin/page" "www.website.com/auth/page".
-- */src/index.tsx*: Main render function with routes from routes.tsx.
-- *LICENSE*: A LICENSE from the template is provided.
+- */src/components*: uomponents provided by the template Horizon Free.
+- */src/layouts*: auth and admin are the 2 pages on this site, there are their base template.
+- */src/theme*: themes provided by the template Horizon Free.
+- */src/types*: typescript types used by the template Horizon Free.
+- */src/variables*: variables for charts.
+- */src/views*: the layout of each page inside "www.website.com/admin/page" "www.website.com/auth/page".
+- */src/index.tsx*: main render function with routes from routes.tsx.
+- *LICENSE*: a LICENSE from the template is provided.
+
+## Run the project
+### Backend
+Run the backend by navigating to the */api/* folder and running the command `python manage.py runserver 80`. This will run the backend Django server on port 80.
+### Frontend
+After running `npm install`, you can launch the web application by running `npm start`. The app is hosted on *http://localhost:3000*.
