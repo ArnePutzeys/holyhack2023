@@ -13,9 +13,9 @@ for review in data:
     # Create new date string with desired format
     new_date_string = original_date.strftime('%Y-%m-%dT%H:%M:%SZ')
     output.append({
-        'rating': review['rating'],
+        'score': review['rating'],
         'title': review['title'],
-        'review': review['review'],
+        'opinion': review['review'],
         'date': new_date_string,
 
     })
