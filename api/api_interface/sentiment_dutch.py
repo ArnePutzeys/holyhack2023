@@ -17,7 +17,7 @@ import torch
 # Zelfde usage als engelse versie
 class Sentiment_dutch:
     def __init__(self):
-        self.model_name = "DTAI-KULeuven/robbert-v2-dutch-sentiment"
+        self.model_name = "DTAI-KULeuven/robbertje-merged-dutch-sentiment"
         self.model = RobertaForSequenceClassification.from_pretrained(self.model_name)
         self.tokenizer = RobertaTokenizer.from_pretrained(self.model_name)
         self.classifier = pipeline('sentiment-analysis', model=self.model, tokenizer = self.tokenizer)

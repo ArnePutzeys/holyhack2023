@@ -17,7 +17,7 @@ def count(input, file, startdate=None, enddate=None):
     
     start_time = time.time()
     # path, argument, output, score, start=0, end=None)
-    sentences, score, iterations = data_load4(file, ['opinion', 'score'], [], [], startdate, enddate)
+    sentences, score, iterations = data_load2(file, ['opinion', 'score'], [], [], startdate, enddate)
     end_time = time.time()
     print("elapsed time: "+str(end_time-start_time))
     
