@@ -34,3 +34,9 @@ The frontend contains the following files and directories:
 - */src/views*: the layout of each page inside "www.website.com/admin/page" "www.website.com/auth/page".
 - */src/index.tsx*: main render function with routes from routes.tsx.
 - *LICENSE*: a LICENSE from the template is provided.
+
+## Run the project
+### Backend
+Run the backend by navigating to the */api/* folder and running the command `python manage.py runserver 80`. This will run the backend Django server on port 80.
+### Frontend
+After running `npm install`, you can launch the web application by running `npm start`. The page is hosted on *http://localhost:3000*.
