@@ -1,6 +1,6 @@
 import json
 import datetime
-with open('example.json', 'r') as f:
+with open('filetoformat.json', 'r') as f:
     data = json.load(f)
 
 output = []
@@ -21,6 +21,6 @@ for review in data:
     })
 
 
-with open('outputkevkevformat.json', 'w') as f:
+with open('output.json', 'w') as f:
     json.dump(output, f, indent=4)
     f.write(',' + '\n')
