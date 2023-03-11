@@ -1,6 +1,8 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 @csrf_exempt
 def handle_search(request):
@@ -27,17 +29,21 @@ def handle_search(request):
         return JsonResponse(response_data)
     else:
         return JsonResponse({'result': 'error', 'message': 'Invalid request method, POST required'})
+
+
+@api_view(['GET'])
+def get_search_result(request):
+    #format: {subject1: [keyw1, keyw2, ...], subject2: [...], ...}
+    pakket_topics = get_subjects(r'C:\Users\kjell\Downloads\holyhack\reviews_pakket.json', 'dutch')
+    spotify_topics = get_subjects(r'C:\Users\kjell\Downloads\holyhack\spotify_data.json', 'english')
+
+    #expected output: {(keywords), hoe_vaak_totaal, hoe_vaak_procent, polariteit, (subjectiviteit), gem_review, tijdsvoorkomen}
+    data = []
+    # Only analyzing the subject for now
+    for topic in pakket_topics.keys():
+        data.append(count(topic))
+        
+    for topic in spotify_topics.keys():
+        data.append(count(topic))
     
-
-
-#@api_view(['GET'])
-#def get_search_result(request):
-#    my_data = {
-#        'hoe_vaak_totaal': '...',
-#        'polariteit': '0 of 1',
-#        'subjectiviteit': '-1 of 1',
-#        'gem_review': '...',
-#        'tijdsvoorkomen': '...',
-#    }
-#    
-#    return Response(my_data)
+    return Response(data)

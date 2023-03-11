@@ -69,7 +69,9 @@ def get_subjects(file_path, language):
             stop=None,
             temperature=0.5,
         )
-        output[response.choices[0].text] = keywords
+
+        subjects = response.choices[0].text.replace('\n', '')
+        output[subjects] = keywords
 
         #print(f"Subject: {response.choices[0].text}")
         #print(f"Top keywords: {keywords}\n")
