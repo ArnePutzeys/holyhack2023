@@ -9,31 +9,26 @@ from nltk.corpus import stopwords
 import pandas as pd
 import numpy as np
 import nltk
+import gensim.downloader as api
 
 example_file = r'C:\Users\kjell\Downloads\holyhack\reviews_pakket.json'
 
 # Currently supported languages: 'English' and 'Dutch'
-def get_subjects(file_path, language):
+
+
+def get_subjects_nl(file_path, language):
 
     nltk.download('stopwords')
 
     # Load dataset
-    reviews = data_load(file_path, 'opinion', None, None, 5)[0]
-
-    #language = language.lower()
-    #print(language)
-    #if language != 'dutch' or language != 'english':
-    #    print('Error: unsupported language for classification')
-    #    exit()
+    reviews = data_load(file_path, 'opinion', None, None, 50)
 
     # Tokenize words and remove stopwords
     tokenizer = RegexpTokenizer(r'\w+')
-    stop_words = set(stopwords.words(language))
-
+    stop_words = set(stopwords.words('dutch'))
 
     def tokenize(text):
         return [word.lower() for word in tokenizer.tokenize(text) if word.lower() not in stop_words]
-
 
     tokens_list = [tokenize(review) for review in reviews]
 
@@ -41,27 +36,24 @@ def get_subjects(file_path, language):
     dictionary = corpora.Dictionary(tokens_list)
     corpus = [dictionary.doc2bow(tokens) for tokens in tokens_list]
 
+    # Download Dutch language model
+    #model = api.load("wiki_nl")
     # Run LDA
     lda_model = models.LdaModel(
-        corpus=corpus, id2word=dictionary, num_topics=10, passes=15)
-
-
-    # pprint(lda_model.print_topics())
-    # Print topics and their keywords
+        corpus=corpus, id2word=dictionary, num_topics=10, passes=15, per_word_topics=True)
 
     # Set up OpenAI API credentials
     openai.api_key = "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"
-
 
     output = dict()
     for i, topic in lda_model.show_topics(formatted=True, num_topics=10, num_words=15):
         # print(f"Topic {i+1}:")
         keywords = [word.split("*")[1].replace('"', '')
                     for word in topic.split(" + ")]
-        prompt = "Find the subject name that the following words have in common " + \
+        prompt = "Vind het onderwerp dat deze woorden met elkaar gemeen hebben " + \
             ", ".join(keywords) + \
-            ". Please only type the subject without any extra text."
-        sleep(4)
+            ". Geef enkel het antwoord, zonder extra tekst."
+        sleep(3)
         response = openai.Completion.create(
             engine="text-davinci-002",
             prompt=prompt,
@@ -70,12 +62,14 @@ def get_subjects(file_path, language):
             stop=None,
             temperature=0.5,
         )
-
-        subjects = response.choices[0].text.replace('\n', '').replace('"', '').replace('.','').split()[-1]
-        print(subjects)
+        print(response.choices[0])
+        try:
+            subjects = response.choices[0].text.replace('\n', '').replace('"', '').replace('.', '').split()[-1]
+        except: 
+            continue
+        #print(subjects)
         output[subjects] = keywords
-
-        #print(f"Subject: {response.choices[0].text}")
-        #print(f"Top keywords: {keywords}\n")
+        # print(f"Subject: {response.choices[0].text}")
+        # print(f"Top keywords: {keywords}\n")
 
     return output
