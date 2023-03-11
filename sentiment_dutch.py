@@ -33,7 +33,7 @@ class Sentiment_dutch:
 
     def get_sentiment(self, data_length):
         average_polarity = self.total_polarity / data_length
-        if self.total_polarity > 0.5:
+        if average_polarity > 0.5:
             overall_sentiment = 'Positive'
         else:
             overall_sentiment = 'Negative'
