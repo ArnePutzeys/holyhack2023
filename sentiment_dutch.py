@@ -25,7 +25,6 @@ class Sentiment_dutch:
 
     def compute_sentiment(self, opinion):
         result = self.classifier(opinion)
-        print(result)
         if result[0]['label'] == 'Negative':
             score = 1 - result[0]['score']
         else:
@@ -38,5 +37,4 @@ class Sentiment_dutch:
             overall_sentiment = 'Positive'
         else:
             overall_sentiment = 'Negative'
-        print({'average_polarity': average_polarity, 'overall_sentiment': overall_sentiment})
         return {'average_polarity': average_polarity, 'overall_sentiment': overall_sentiment}
