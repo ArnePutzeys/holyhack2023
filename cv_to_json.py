@@ -1,38 +1,29 @@
-import datetime
+# First used an online converter for cv to json, then json to json for right formatting
 import json
-file = open("data/reviews_spotify.csv", 'r')
-f_out = open('newfile.txt', 'w')
+from datetime import datetime
+# Open the existing JSON file
+with open('./csvjson.json', 'r') as f:
+    json_data = f.read()
 
+# Load the JSON data
+data = json.loads(json_data)
 
-for line in file:
-    date_str, opinion, score, thumbs_up, replies = line.strip().split(",", 4)
-
-    score = score.strip('"')
-    opinion = opinion.strip('"')
-
-    # Escape any remaining double quotes within the opinion field
-    opinion = opinion.replace('"', '\\"')
-
-    # Remove any newlines within the opinion field
-    opinion = opinion.replace('\n', '')
-
-    # Convert the date string to a datetime object (source: internet)
-    dt = datetime.datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
-
-    # Format the datetime object as an ISO 8601 timestamp
-    iso_date = dt.isoformat(timespec='seconds') + 'Z'
-
-    output_dict = {
-        "score": score,
-        "title": "",
-        "opinion": opinion,
-        "date": iso_date,
-        "thumbs_up": thumbs_up
+# Create a new list with reordered fields
+new_data = []
+for item in data:
+    new_item = {
+        'score': item['rating'],
+        'title': '',
+        'opinion': item['review'],
+        'date': (datetime.strptime(item['Year'], '%Y-%m-%d %H:%M:%S')).strftime('%Y-%m-%dT%H:%M:%SZ')
     }
+    new_data.append(new_item)
 
-    # Print the output dictionary
-    # print(output_dict)
+# Convert the new data to JSON format
+json_result = json.dumps(new_data, indent=2)
 
-    output_str = json.dumps(output_dict, ensure_ascii=False, indent=4)
-    f_out.write(output_str)
-    f_out.write(',' + '\n')
+# Write the updated JSON to a file
+with open('./out.json', 'w') as f:
+    f.write(json_result)
+
+
