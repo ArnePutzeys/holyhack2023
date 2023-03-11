@@ -73,24 +73,29 @@ def count(input, file, startdate=None, enddate=None, lines=None):
             gem_review.append(count[element][1]/count[element][0])
         except ZeroDivisionError:
             gem_review.append(0)
-
+            
+    x_values = []
+    y_values = []
     for i in range(len(count)):
         procent.append(totaal[i]/iterations)
         
-        x_values = []
-        y_values = []
+        x_values.append([])
+        y_values.append([])
+        # for element in graph_values:
+        #     x_values.append(element)
+        #     y_values.append(graph_values[element])
         for element in graph_values:
-            x_values.append(element)
-            y_values.append(graph_values[element])
+            x_values[i].append(element)
+            y_values[i].append(graph_values[element])
 
     # (keywords), hoe_vaak_totaal, hoe_vaak_procent, polariteit, (subjectiviteit), gem_review, tijdsvoorkomen
     print(keywords,totaal,procent,polariteit,subjectivity,gem_review,tijdsvoorkomen,x_values,y_values)
     return keywords,totaal,procent,polariteit,subjectivity,gem_review,tijdsvoorkomen, x_values, y_values
             
 if __name__ == "__main__":
-    #input = ['status','quit']
+    input = ['status','quit']
     #input = ['Vinted-app', 'verzending', 'bezorging', 'post', 'levering', 'opruimen', 'Pakket']
-    input = ['quality']
+    #input = ['quality']
     for i in range(len(input)):
         input[i] = input[i].lower()
 
