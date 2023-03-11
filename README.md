@@ -39,4 +39,4 @@ The frontend contains the following files and directories:
 ### Backend
 Run the backend by navigating to the */api/* folder and running the command `python manage.py runserver 80`. This will run the backend Django server on port 80.
 ### Frontend
-After running `npm install`, you can launch the web application by running `npm start`. The page is hosted on *http://localhost:3000*.
+After running `npm install`, you can launch the web application by running `npm start`. The app is hosted on *http://localhost:3000*.
