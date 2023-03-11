@@ -11,7 +11,10 @@ import time
 
 def count(input, file, startdate=None, enddate=None, lines=None):
     #count = {element: [0, 0, Sentiment_dutch()] for element in input}
-    count = {element: [0, 0, Sentiment_dutch()] for element in input}
+    if file.endswith('reviews_pakket.json'):
+        count = {element: [0, 0, Sentiment_dutch()] for element in input}
+    else:
+        count = {element: [0, 0, Sentiment()] for element in input}
 
     start_time = time.time()
     start_time_tot = time.time()
