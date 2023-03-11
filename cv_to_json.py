@@ -35,4 +35,4 @@ for line in file:
 
     output_str = json.dumps(output_dict, ensure_ascii=False, indent=4)
     f_out.write(output_str)
-    f_out.write('\n')
+    f_out.write(',' + '\n')
