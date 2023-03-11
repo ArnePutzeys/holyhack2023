@@ -27,6 +27,8 @@ class Sentiment_dutch:
         result = self.classifier(opinion)
         if result[0]['label'] == 'Negative':
             score = 1 - result[0]['score']
+        else:
+            score = result[0]['score']
         self.total_polarity += score
 
     def get_sentiment(self, data_length):
