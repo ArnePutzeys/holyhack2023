@@ -16,21 +16,21 @@ The backend files are also located in the api_interface folder. Below you can fi
 - *data_count.py*:
 
 In the scripts folder you can find additional scripts we developed during the hackathon:
-- *reviewscraping.py*: Used to scrape the Apple app store to collect data for our "competition analysis" functionality.
-- *cv_to_json.py*: Used (together with an online tool) to convert the spotify *.csv* data to an usable *.json* format.
+- *reviewscraping.py*: used to scrape the Apple app store to collect data for our "competition analysis" functionality.
+- *cv_to_json.py*: used (together with an online tool) to convert the spotify *.csv* data to an usable *.json* format.
 
 ### Frontend (React)
 The frontend contains the following files and directories:
 - */src/assets*: Assets of this project: this includes css, images and svg's.
 
 - */src/backend*: JSON processors to contact the API from the backend.
-- */src/chartsapi*: Uses the backend data to create charts to display on the website.
+- */src/chartsapi*: uses the backend data to create charts to display on the website.
 
-- */src/components*: Components provided by the template Horizon Free.
-- */src/layouts*: Auth and admin are the 2 pages on this site, there are their base template.
-- */src/theme*: Themes provided by the template Horizon Free.
-- */src/types*: Typescript types used by the template Horizon Free.
-- */src/variables*: Variables for charts.
-- */src/views*: The layout of each page inside "www.website.com/admin/page" "www.website.com/auth/page".
-- */src/index.tsx*: Main render function with routes from routes.tsx.
-- *LICENSE*: A LICENSE from the template is provided.
+- */src/components*: uomponents provided by the template Horizon Free.
+- */src/layouts*: auth and admin are the 2 pages on this site, there are their base template.
+- */src/theme*: themes provided by the template Horizon Free.
+- */src/types*: typescript types used by the template Horizon Free.
+- */src/variables*: variables for charts.
+- */src/views*: the layout of each page inside "www.website.com/admin/page" "www.website.com/auth/page".
+- */src/index.tsx*: main render function with routes from routes.tsx.
+- *LICENSE*: a LICENSE from the template is provided.
