@@ -9,16 +9,22 @@ import multiprocessing
 import numpy as np
 import time
 
-def count(input, file, startdate=None, enddate=None):
+def count(input, file, startdate=None, enddate=None, lines=None):
     #count = {element: [0, 0, Sentiment_dutch()] for element in input}
     count = {element: [0, 0, Sentiment_dutch()] for element in input}
 
     start_time = time.time()
     start_time_tot = time.time()
     if startdate != None and enddate != None:
-        sentences, score, iterations = data_load2(file, ['opinion', 'score'], startdate, enddate, 0)
+        if lines == None:
+            sentences, score, iterations = data_load2(file, ['opinion', 'score'], startdate, enddate, lines)
+        else:
+            sentences, score, iterations = data_load2(file, ['opinion', 'score'], startdate, enddate, 0)
     else:
-        sentences, score, iterations = data_load4(file, ['opinion', 'score'], None, None, 0, input)
+        if lines == None:
+            sentences, score, iterations = data_load4(file, ['opinion', 'score'], None,None, 0, input)
+        else:
+            sentences, score, iterations = data_load4(file, ['opinion', 'score'], None,None, lines,input)
     end_time = time.time()
     print("elapsed time: "+str(end_time-start_time))
     start_time = time.time()
@@ -38,7 +44,11 @@ def count(input, file, startdate=None, enddate=None):
     print("elapsed time tot: "+str(end_time_tot-start_time_tot))
            
     for element in count.keys():
-        count[element][1] = count[element][1] / count[element][0]
+        try: 
+            count[element][1] = count[element][1] / count[element][0]
+        except ZeroDivisionError:
+            print('Item does not appear in the data')
+            exit()
 
     # (keywords), hoe_vaak_totaal, hoe_vaak_procent, polariteit, (subjectiviteit), gem_review, tijdsvoorkomen
     keywords = input

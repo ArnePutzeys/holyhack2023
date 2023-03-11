@@ -43,7 +43,7 @@ def get_subjects(file_path, language):
 
     # Run LDA
     lda_model = models.LdaModel(
-        corpus=corpus, id2word=dictionary, num_topics=20, passes=30)
+        corpus=corpus, id2word=dictionary, num_topics=10, passes=15)
 
 
     # pprint(lda_model.print_topics())
@@ -54,14 +54,14 @@ def get_subjects(file_path, language):
 
 
     output = dict()
-    for i, topic in lda_model.show_topics(formatted=True, num_topics=20, num_words=30):
+    for i, topic in lda_model.show_topics(formatted=True, num_topics=10, num_words=15):
         # print(f"Topic {i+1}:")
         keywords = [word.split("*")[1].replace('"', '')
                     for word in topic.split(" + ")]
         prompt = "Find the subject name that the following words have in common " + \
             ", ".join(keywords) + \
             ". Please only type the subject without any extra text."
-        sleep(5)
+        sleep(4)
         response = openai.Completion.create(
             engine="text-davinci-002",
             prompt=prompt,
@@ -71,7 +71,8 @@ def get_subjects(file_path, language):
             temperature=0.5,
         )
 
-        subjects = response.choices[0].text.replace('\n', '')
+        subjects = response.choices[0].text.replace('\n', '').replace('"', '').split()[-1]
+        print(subjects)
         output[subjects] = keywords
 
         #print(f"Subject: {response.choices[0].text}")
