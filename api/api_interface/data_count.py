@@ -53,43 +53,64 @@ def count(input, file, startdate=None, enddate=None, lines=None):
     polariteit = []
     sentiment = []
     gem_review = []
+    # try: 
+    #     count[element][1] = count[element][1] / count[element][0]
+    #     print(count[element][1])
+    # except ZeroDivisionError:
+    #     count[element][1] = 0 
+    # try:
+    #     totaal = [count[element][0] for element in count]
+    # except ZeroDivisionError:
+    #     totaal.append(0)
+    # try:
+    #     procent = [t / iterations for t in totaal]
+    # except ZeroDivisionError:
+    #     procent.append(0)
+    # try:
+    #     #polariteit = [count[element][2].get_sentiment(t)['average_polarity'] for element, t in zip(count, totaal)]
+    #     polariteit = count[element][2].get_sentiment(t)['average_polarity']
+    # except ZeroDivisionError:
+    #     polariteit.append(0)
+    # try:    
+    #     sentiment = [count[element][2].get_sentiment(t)['overall_sentiment'] for element, t in zip(count, totaal)]
+    # except ZeroDivisionError:
+    #     sentiment.append(0)
+    # try:
+    #     gem_review = [count[element][1] for element in count]
+    # except ZeroDivisionError:
+    #     gem_review.append(0)
     for element in count.keys():
-        try: 
-            count[element][1] = count[element][1] / count[element][0]
-        except ZeroDivisionError:
-            count[element][1] = 0 
+        totaal.append(count[element][0])
         try:
-            totaal = [count[element][0] for element in count]
-        except ZeroDivisionError:
-            totaal.append(0)
-        try:
-            procent = [t / iterations for t in totaal]
-        except ZeroDivisionError:
-            procent.append(0)
-        try:
-            polariteit = [count[element][2].get_sentiment(t)['average_polarity'] for element, t in zip(count, totaal)]
+            polariteit.append(count[element][2].get_sentiment(count[element][0])['average_polarity'])
         except ZeroDivisionError:
             polariteit.append(0)
-        try:    
-            sentiment = [count[element][2].get_sentiment(t)['overall_sentiment'] for element, t in zip(count, totaal)]
+        try:
+            sentiment.append(count[element][2].get_sentiment(count[element][0])['overall_sentiment'])
         except ZeroDivisionError:
             sentiment.append(0)
         try:
-            gem_review = [count[element][1] for element in count]
+            gem_review.append(count[element][1]/count[element][0])
         except ZeroDivisionError:
             gem_review.append(0)
+
+    for i in range(len(count)):
+        procent.append(totaal[i]/iterations)
+
+              
 
     # (keywords), hoe_vaak_totaal, hoe_vaak_procent, polariteit, (subjectiviteit), gem_review, tijdsvoorkomen
     print(keywords,totaal,procent,polariteit,sentiment,gem_review,tijdsvoorkomen)
     return keywords,totaal,procent,polariteit,sentiment,gem_review,tijdsvoorkomen
             
 if __name__ == "__main__":
-    input = ['status', 'quit']
+    #input = ['status','quit']
+    input = ['Vinted-app', 'verzending', 'bezorging', 'post', 'levering', 'opruimen', 'Pakket']
     #input = ['quality']
     for i in range(len(input)):
         input[i] = input[i].lower()
 
     file = '../../data/reviews_pakket.json'
     #file = 'data/reviews_spotify.csv'
-    count(input, file,None,None,10000)
+    count(input, file,None,None,20000)
     #count(input, file, '2020-11-19', '2020-12-30')
