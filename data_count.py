@@ -18,7 +18,7 @@ def count(input, file, startdate=None, enddate=None):
                 count[word][0] += 1
                 count[word][1] += int(score[i])
                 count[word][2].compute_sentiment(sentences[i])
-        print("it: "+str(i))
+        #print("it: "+str(i))
                 
     for element in count.keys():
         count[element][1] = count[element][1] / count[element][0]

@@ -50,7 +50,7 @@ def data_load(path, argument, startdate=None, enddate=None, number_of_reviews=0)
         elif startdate != None and enddate != None and review_date[0] == enddate[0] and review_date[1] == enddate[1] and review_date[2] < enddate[2]:
             print(startdate, review_date, enddate)
             break
-        print("it: "+str(k))
+        #print("it: "+str(k))
         k += 1
     # Closing file
     f.close()
