@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 import nltk
 
-example_file = r'C:\Users\kjell\Downloads\holyhack\reviews_pakket.json'
+#example_file = r'C:\Users\kjell\Downloads\holyhack\reviews_pakket.json'
 
 # Currently supported languages: 'English' and 'Dutch'
 def get_subjects(file_path, language):
@@ -18,7 +18,7 @@ def get_subjects(file_path, language):
     nltk.download('stopwords')
 
     # Load dataset
-    reviews = data_load(file_path, 'opinion', None, None, 5)[0]
+    reviews = data_load(file_path, 'opinion', None, None, 50)
 
     #language = language.lower()
     #print(language)

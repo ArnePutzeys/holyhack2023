@@ -29,6 +29,35 @@ USE_X_FORWARDED_HOST = True
 
 ALLOWED_HOSTS = ['*', '5442-84-198-242-165.eu.ngrok.io']
 
+# CORS_ALLOWED_ORIGINS = ['https://5442-84-198-242-165.eu.ngrok.io']
+
+CORS_ORIGINS_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "cache-control",
+    "pragma",
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,11 +69,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api_interface',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
