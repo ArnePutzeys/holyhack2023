@@ -1,4 +1,5 @@
 import json
+import csv
 
 
 def get_date(date):
@@ -11,16 +12,17 @@ def data_load(path, argument, startdate=None, enddate=None, number_of_reviews=0)
     if enddate != None:
         enddate = enddate.split('-')
     output = []
+    
     # Opening JSON file
-    f = open(path, 'r')
-
-    # returns JSON object as
+    f = open(path, 'r', encoding='utf-8')
+    
+    # returns JSON object as 
     # a dictionary
     data = json.load(f)
-
+    
     # Iterating through the json
     # list
-    k = 0
+    k = 1
     for i in data:
         if startdate != None and enddate != None:
             review_date = get_date(i['date'])
@@ -38,14 +40,18 @@ def data_load(path, argument, startdate=None, enddate=None, number_of_reviews=0)
             if startdate == None and enddate == None:
                 output.append(i[argument])
             elif startdate[0] <= review_date[0] <= enddate[0] and startdate[1] <= review_date[1] <= enddate[1] and startdate[2] <= review_date[2] <= enddate[2]:
+                print("found")
                 output.append(i[argument])
 
         if k == number_of_reviews and number_of_reviews != 0:
             break
         elif k == len(data) and number_of_reviews == 0:
             break
+        elif startdate != None and enddate != None and review_date[0] == enddate[0] and review_date[1] == enddate[1] and review_date[2] < enddate[2]:
+            print(startdate, review_date, enddate)
+            break
+        #print("it: "+str(k))
         k += 1
-
     # Closing file
     f.close()
-    return output
+    return output, k

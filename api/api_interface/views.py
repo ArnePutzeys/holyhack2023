@@ -15,8 +15,9 @@ def handle_search(request):
 
         response_data = {
             'result': 'success',
-            'data': {'hoe_vaak_totaal': '...', 
-                     'hoe_vaak_procent'
+            'data': {'hoe_vaak_totaal': '...',
+                     'diagram_type': '...',
+                     'hoe_vaak_procent': '...',
                      'polariteit': '0 of 1',
                      'subjectiviteit': '-1 of 1',
                      'gem_review': '...',
