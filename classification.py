@@ -11,7 +11,7 @@ import openai
 import os
 
 # Load dataset
-reviews = data_load('C:\Users\kjell\Downloads\holyhack\spotify_data.json', 'opinion')
+reviews = data_load(r'C:\Users\kjell\Downloads\holyhack\spotify_data.json', 'opinion')
 
 #reviews = ["This product is amazing! It exceeded my expectations and I would highly recommend it to anyone looking for a high-quality product.", 
 #           "I was disappointed with this product. It didn't work as advertised and I ended up returning it.",
@@ -62,12 +62,6 @@ for i, topic in lda_model.show_topics(formatted=True, num_topics=5, num_words=10
     temperature=0.5,
     )
 
-    print(response.choices[0].text)
-    #print(f"Top keywords: {keywords}\n")
-
-
-
-
-# Generate the description using OpenAI's GPT-3 language model
-
+    print(f"Subject: {response.choices[0].text}")
+    print(f"Top keywords: {keywords}\n")
 
