@@ -45,7 +45,14 @@ def count(input, file, startdate=None, enddate=None, lines=None):
     print("elapsed time: "+str(end_time-start_time))
     end_time_tot= time.time()
     print("elapsed time tot: "+str(end_time_tot-start_time_tot))
-           
+
+    keywords = input
+    tijdsvoorkomen = []
+    totaal = []
+    procent = []
+    polariteit = []
+    sentiment = []
+    gem_review = []
     for element in count.keys():
         try: 
             count[element][1] = count[element][1] / count[element][0]
@@ -57,18 +64,39 @@ def count(input, file, startdate=None, enddate=None, lines=None):
             gem_review = [count[element][1] for element in count]
             tijdsvoorkomen = []
         except ZeroDivisionError:
-            pass
+            count[element][1] = 0 
+        try:
+            totaal = [count[element][0] for element in count]
+        except ZeroDivisionError:
+            totaal.append(0)
+        try:
+            procent = [t / iterations for t in totaal]
+        except ZeroDivisionError:
+            procent.append(0)
+        try:
+            polariteit = [count[element][2].get_sentiment(t)['average_polarity'] for element, t in zip(count, totaal)]
+        except ZeroDivisionError:
+            polariteit.append(0)
+        try:    
+            sentiment = [count[element][2].get_sentiment(t)['overall_sentiment'] for element, t in zip(count, totaal)]
+        except ZeroDivisionError:
+            sentiment.append(0)
+        try:
+            gem_review = [count[element][1] for element in count]
+        except ZeroDivisionError:
+            gem_review.append(0)
+
     # (keywords), hoe_vaak_totaal, hoe_vaak_procent, polariteit, (subjectiviteit), gem_review, tijdsvoorkomen
-    #print(keywords,totaal,procent,polariteit,sentiment,gem_review,tijdsvoorkomen)
+    print(keywords,totaal,procent,polariteit,sentiment,gem_review,tijdsvoorkomen)
     return keywords,totaal,procent,polariteit,sentiment,gem_review,tijdsvoorkomen
             
 if __name__ == "__main__":
-    input = ['status']
+    input = ['status', 'quit']
     #input = ['quality']
     for i in range(len(input)):
         input[i] = input[i].lower()
 
     file = '../../data/reviews_pakket.json'
     #file = 'data/reviews_spotify.csv'
-    count(input, file)
+    count(input, file,None,None,10000)
     #count(input, file, '2020-11-19', '2020-12-30')
