@@ -1,5 +1,6 @@
 import os
 import openai
+from time import sleep
 from data_load import data_load
 from pprint import pprint
 from gensim import corpora, models
@@ -60,7 +61,7 @@ def get_subjects(file_path, language):
         prompt = "Find the subject name that the following words have in common " + \
             ", ".join(keywords) + \
             ". Please only type the subject without any extra text."
-
+        sleep(5)
         response = openai.Completion.create(
             engine="text-davinci-002",
             prompt=prompt,
@@ -77,5 +78,3 @@ def get_subjects(file_path, language):
         #print(f"Top keywords: {keywords}\n")
 
     return output
-
-print(get_subjects(example_file, 'dutch'))
